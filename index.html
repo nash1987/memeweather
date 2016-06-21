@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
+    <script src="./jquery-3.0.0.min.js"></script>
+</head>
+<body>
+   <div class="container">
+       <div class="col-xs-6">
+            <div>
+                <div>the weather is: <span id="responseWeather"></div>
+                <label for="ZipCode">Zip Code</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Zip Code">
+            </div>
+            <button id="Submit">Submit</button>
+       </div>
+   </div>
+<script>
+    var response;
+    $( "#Submit" ).click(function() {
+         var currentZip = $("#zip").val();
+         $.ajax({
+            method: "GET",
+            url: "http://api.openweathermap.org/data/2.5/weather",
+            data: { zip:currentZip,appid: "9e2ecf664c6f575cf6ba13a6abafc60d",units:"imperial" }
+        })
+        .done(function( msg ) {
+            $("#responseWeather").text(msg.main.temp);
+        });
+    });
+</script>
+</body>
+</html>
+
+
+
